@@ -9,6 +9,7 @@ const passportConfig = require("./passport-config");
 
 module.exports = {
   init(app, express){
+    app.use(express.static('public'))
     app.set("views", viewsFolder);
     app.set("view engine", "ejs");
     app.use(bodyParser.urlencoded({ extended: true }));
