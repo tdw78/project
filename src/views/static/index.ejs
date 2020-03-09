@@ -5,11 +5,14 @@
   </head>
   <body>
      <% include ./partials/navbar.ejs %>
-     
+     <% include ../static/partials/messages.ejs %>
      <header class="jumbotron my-4 text-center">
        <h1 class="display-3">Elena: The Party Planner</h1 class="display-3">
        <h2 class="slogan">We make your dream party come true.</h2>
-     </header>
+       <% if(currentUser) { %>
+        <%= currentUser.name %>
+       <% } %>
+      </header>
 
      <section class="row text-center">
        <section class="col-lg-4">

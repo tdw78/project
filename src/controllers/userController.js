@@ -1,5 +1,6 @@
 const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
+const flash = require("express-flash");
 
 module.exports = {
 
@@ -20,7 +21,7 @@ signUp(req, res, next){
     if(err){
       req.flash("error", err);
       console.log(err);
-      res.redirect("/");
+      res.redirect("/users/signUp");
 
     } else {
 
@@ -31,5 +32,22 @@ signUp(req, res, next){
     }
   });
 },
+signOut(req, res, next){
+   req.logout();
+   req.flash("notice", "You have signed out");
+   res.redirect("/");
+},
+userSignIn(req, res, next){
+  passport.authenticate("local")(req, res, function () {
+    if(!req.user){
+      req.flash("notice", "Sign in failed. Please try again.")
+      res.redirect("/users/signIn");
+    } else {
+      req.flash("notice", "You've successfully signed in!");
+      res.redirect("/");
+    }
+  })
+}
+
 
 }

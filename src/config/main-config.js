@@ -8,6 +8,7 @@ const flash = require("express-flash");
 const passportConfig = require("./passport-config");
 
 module.exports = {
+ 
   init(app, express){
     app.use(express.static('public'))
     app.set("views", viewsFolder);
@@ -19,10 +20,10 @@ module.exports = {
       secret: process.env.cookieSecret,
       resave: false,
       saveUninitialized: false,
-      cookie: { maxAge: 1.21e+9 }
+      cookies: { maxAge: 1.21e+9 }
    }));
    app.use(flash());
-   //passportConfig.init(app);
+   passportConfig.init(app);
 
    app.use((req,res,next) => {
      res.locals.currentUser = req.user;
